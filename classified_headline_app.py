@@ -5,17 +5,7 @@ import pandas as pd
 
 import pickle
 
-import urllib.request
-
-# url = 'https://drive.google.com/file/d/1-ShRaypyJzg1e9o79dpkqLL-5x1OcqeI/view?usp=share_link'
-# filename = 'bow_vectorizer.pkl'
-
-# bow_vectorizer = urllib.request.urlretrieve(url, filename)
-
-# vectorizer = CountVectorizer()
-# # vectorizer = bow_vectorizer
-
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+# from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 # from sklearn.model_selection import train_test_split
 # from sklearn.naive_bayes import MultinomialNB
 # from sklearn.ensemble import RandomForestClassifier
