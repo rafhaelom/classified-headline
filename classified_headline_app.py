@@ -22,10 +22,8 @@ bow_vectorizer = pickle.load(open('model/bow_vectorizer.pkl', "rb"))
 tfidf_vectorizer = pickle.load(open('model/tfidf_vectorizer.pkl', "rb"))
 
 # models
-model_nb_bow = pickle.load(open('model/model_nb_bow.pkl', "rb"))
-model_nb_tfidf = pickle.load(open('model/model_nb_tfidf.pkl', "rb"))
-# model_rf_bow = pickle.load(open('model/model_rf_bow.pkl', "rb"))
-# model_rf_tfidf = pickle.load(open('model/model_rf_tfidf.pkl', "rb"))
+model_nb_bow = pickle.load(open('model/model_mnb_bow.pkl', "rb"))
+model_nb_tfidf = pickle.load(open('model/model_mnb_tfidf.pkl', "rb"))
 
 # funções de normalização do texto
 def sentence_tokenizer(sentence):
@@ -44,7 +42,7 @@ opcao = st.selectbox("🎲 Escolha um opção:", ["Texto", "Link"], index=0, hel
 if opcao == "Texto":
   form = st.form(key='my_form')
   texto_manchete = form.text_area(label="📝 Insira uma manchete: ", value="", placeholder='Insira a manchete aqui...')
-  submit_button = form.form_submit_button(label='Resumir 🎉')
+  submit_button = form.form_submit_button(label='Classificar 🎉')
 if opcao == "Link":
   form = st.form(key='my_form')
   url_noticia = form.text_input(label="🌐 Insira um link: ", value="", placeholder='Informe o link aqui...')
