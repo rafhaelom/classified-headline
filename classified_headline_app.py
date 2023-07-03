@@ -54,7 +54,7 @@ if submit_button and opcao == "Texto" and texto_manchete != "":
     predicao_bow_nb = model_nb_bow.predict(bow_vectorizer.transform([normalizer(texto_manchete)]))
     predicao_tfidf_nb = model_nb_tfidf.predict(tfidf_vectorizer.transform([normalizer(texto_manchete)]))
 
-    st.write("### Classificador Naive Bayes 🧮")
+    st.write("### Classificador Multinomial Naive Bayes 🧮")
     st.success(body=f"Bag of Words: {predicao_bow_nb}", icon="✅")
     st.success(body=f"TF-IDF: {predicao_tfidf_nb}", icon="✅")
 if submit_button and opcao == "Link" and url_noticia != "":
@@ -64,12 +64,13 @@ if submit_button and opcao == "Link" and url_noticia != "":
     manchete_link = article.title
     g.close()
 
+    st.write("### Manchete da notícia 📑")
     st.info(body=manchete_link)
   with st.spinner('Classificando...'):
     predicao_bow_nb = model_nb_bow.predict(bow_vectorizer.transform([normalizer(manchete_link)]))
     predicao_tfidf_nb = model_nb_tfidf.predict(tfidf_vectorizer.transform([normalizer(manchete_link)]))
 
-    st.write("### Classificador Naive Bayes 🧮")
+    st.write("### Classificador Multinomial Naive Bayes 🧮")
     st.success(body=f"Bag of Words: {predicao_bow_nb}", icon="✅")
     st.success(body=f"TF-IDF: {predicao_tfidf_nb}", icon="✅")
 else:
