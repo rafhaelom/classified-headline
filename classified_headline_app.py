@@ -51,12 +51,14 @@ if opcao == "Link":
 # Classificador da manchete após a escolha da origem
 if submit_button and opcao == "Texto" and texto_manchete != "":
   with st.spinner('Classificando...'):
-    predicao_bow_nb = model_nb_bow.predict(bow_vectorizer.transform([normalizer(texto_manchete)]))
-    predicao_tfidf_nb = model_nb_tfidf.predict(tfidf_vectorizer.transform([normalizer(texto_manchete)]))
+    predicao_bow_nb = model_nb_bow.predict(bow_vectorizer.transform([normalizer(texto_manchete)]))[0]
+    predicao_proba_bow_nb = max(model_nb_bow.predict_proba(bow_vectorizer.transform([normalizer(texto_manchete)]))[0])
+    predicao_tfidf_nb = model_nb_tfidf.predict(tfidf_vectorizer.transform([normalizer(texto_manchete)]))[0]
+    predicao_proba_tfidf_nb = max(model_nb_tfidf.predict_proba(tfidf_vectorizer.transform([normalizer(texto_manchete)]))[0])
 
     st.write("### Classificador Multinomial Naive Bayes 🧮")
-    st.success(body=f"Bag of Words: {predicao_bow_nb}", icon="✅")
-    st.success(body=f"TF-IDF: {predicao_tfidf_nb}", icon="✅")
+    st.success(body=f"Bag of Words: {predicao_bow_nb} com {predicao_proba_bow_nb}", icon="✅")
+    st.success(body=f"TF-IDF: {predicao_tfidf_nb} com {predicao_proba_tfidf_nb}", icon="✅")
 if submit_button and opcao == "Link" and url_noticia != "":
   with st.spinner('Extraindo manchete...'):
     g = Goose()
@@ -67,12 +69,14 @@ if submit_button and opcao == "Link" and url_noticia != "":
     st.write("### Manchete da notícia 📑")
     st.info(body=manchete_link)
   with st.spinner('Classificando...'):
-    predicao_bow_nb = model_nb_bow.predict(bow_vectorizer.transform([normalizer(manchete_link)]))
-    predicao_tfidf_nb = model_nb_tfidf.predict(tfidf_vectorizer.transform([normalizer(manchete_link)]))
+    predicao_bow_nb = model_nb_bow.predict(bow_vectorizer.transform([normalizer(manchete_link)]))[0]
+    predicao_proba_bow_nb = max(model_nb_bow.predict_proba(bow_vectorizer.transform([normalizer(manchete_link)]))[0])
+    predicao_tfidf_nb = model_nb_tfidf.predict(tfidf_vectorizer.transform([normalizer(manchete_link)]))[0]
+    predicao_proba_tfidf_nb = max(model_nb_tfidf.predict_proba(tfidf_vectorizer.transform([normalizer(manchete_link)]))[0])
 
     st.write("### Classificador Multinomial Naive Bayes 🧮")
-    st.success(body=f"Bag of Words: {predicao_bow_nb}", icon="✅")
-    st.success(body=f"TF-IDF: {predicao_tfidf_nb}", icon="✅")
+    st.success(body=f"Bag of Words: {predicao_bow_nb} com {predicao_proba_bow_nb}", icon="✅")
+    st.success(body=f"TF-IDF: {predicao_tfidf_nb} com {predicao_proba_bow_nb}", icon="✅")
 else:
   st.warning(body="Insira uma manchete!!!", icon="⚠")
 
