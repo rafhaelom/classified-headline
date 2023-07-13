@@ -57,8 +57,10 @@ if submit_button and opcao == "Texto" and texto_manchete != "":
     predicao_proba_tfidf_nb = max(model_nb_tfidf.predict_proba(tfidf_vectorizer.transform([normalizer(texto_manchete)]))[0])
 
     st.write("### Classificador Multinomial Naive Bayes 🧮")
-    st.success(body=f"Bag of Words: {predicao_bow_nb} com {predicao_proba_bow_nb}", icon="✅")
-    st.success(body=f"TF-IDF: {predicao_tfidf_nb} com {predicao_proba_tfidf_nb}", icon="✅")
+    st.write("#### Bag of Words")
+    st.success(body=f"Tema: [{predicao_bow_nb}] com [{predicao_proba_bow_nb}] de probabilidade.", icon="✅")
+    st.write("#### TF-IDF")
+    st.success(body=f"Tema: [{predicao_tfidf_nb}] com [{predicao_proba_tfidf_nb}] de probabilidade.", icon="✅")
 if submit_button and opcao == "Link" and url_noticia != "":
   with st.spinner('Extraindo manchete...'):
     g = Goose()
@@ -75,8 +77,10 @@ if submit_button and opcao == "Link" and url_noticia != "":
     predicao_proba_tfidf_nb = max(model_nb_tfidf.predict_proba(tfidf_vectorizer.transform([normalizer(manchete_link)]))[0])
 
     st.write("### Classificador Multinomial Naive Bayes 🧮")
-    st.success(body=f"Bag of Words: {predicao_bow_nb} com {predicao_proba_bow_nb}", icon="✅")
-    st.success(body=f"TF-IDF: {predicao_tfidf_nb} com {predicao_proba_bow_nb}", icon="✅")
+    st.write("#### Bag of Words")
+    st.success(body=f"Tema: [{predicao_bow_nb}] com [{predicao_proba_bow_nb}] de probabilidade.", icon="✅")
+    st.write("#### TF-IDF")
+    st.success(body=f"Tema: [{predicao_tfidf_nb}] com [{predicao_proba_bow_nb}] de probabilidade.", icon="✅")
 else:
   st.warning(body="Insira uma manchete!!!", icon="⚠")
 
