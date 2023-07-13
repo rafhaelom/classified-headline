@@ -17,13 +17,25 @@ import spacy
 
 nlp = spacy.load('pt_core_news_sm')
 
-# vectorizer models
-bow_vectorizer = pickle.load(open('model/bow_vectorizer.pkl', "rb"))
-tfidf_vectorizer = pickle.load(open('model/tfidf_vectorizer.pkl', "rb"))
+# With `ttl`, objects in cache are removed after 24 hours.
+@st.cache_resource(ttl=24*3600)
+def load_vectorizer():
+  '''
+  vectorizer models
+  '''
+  bow_vectorizer = pickle.load(open('model/bow_vectorizer.pkl', "rb"))
+  tfidf_vectorizer = pickle.load(open('model/tfidf_vectorizer.pkl', "rb"))
+  return bow_vectorizer, tfidf_vectorizer
 
-# models
-model_nb_bow = pickle.load(open('model/model_mnb_bow.pkl', "rb"))
-model_nb_tfidf = pickle.load(open('model/model_mnb_tfidf.pkl', "rb"))
+# With `ttl`, objects in cache are removed after 24 hours.
+@st.cache_resource(ttl=24*3600)
+def load_models():
+  '''
+  models
+  '''
+  model_nb_bow = pickle.load(open('model/model_mnb_bow.pkl', "rb"))
+  model_nb_tfidf = pickle.load(open('model/model_mnb_tfidf.pkl', "rb"))
+  return model_nb_bow, model_nb_tfidf
 
 # funções de normalização do texto
 def sentence_tokenizer(sentence):
@@ -33,6 +45,11 @@ def sentence_tokenizer(sentence):
 def normalizer(sentence):
   tokenized_sentence = sentence_tokenizer(sentence)
   return ' '.join(tokenized_sentence)
+
+
+# Load vectorizers e models.
+bow_vectorizer, tfidf_vectorizer = load_vectorizer()
+model_nb_bow, model_nb_tfidf = load_models()
 
 ##### INÍCIO APP.
 st.markdown("""<h1 align='center'>Classificação da notícia pela manchete 📰<h1 align='justify'>""", unsafe_allow_html=True)
